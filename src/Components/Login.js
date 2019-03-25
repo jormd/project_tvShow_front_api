@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from "react-router-dom";
+import { GoogleLogin } from 'react-google-login';
 
 import Auth from "./../auth";
 
@@ -47,7 +47,31 @@ class Login extends Component {
             });
     }
 
+    loginGoole(response){
+
+        fetch("http://127.0.0.1:8080/api/logingoogle", {
+            method: "POST",
+            headers: new Headers({
+                'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
+            }),
+            body: "token="+ response.tokenId
+        })
+        .then(response => response.json())
+        .then(response => {
+            console.log(response);
+            if(response.code === "succes"){
+                auth.setAuthentificate(true);
+                auth.setToken(response.tokenJWT);
+                this.props.history.push('/home');
+            }
+        });
+    }
+
     render() {
+
+        const responseGoogle = (response) => {
+            this.loginGoole(response);
+        };
 
         return (
             <div className="App">
@@ -58,7 +82,14 @@ class Login extends Component {
                   <input name="password" id="password" onChange={this.handleChange} type="password"/>
                   <input type="submit" value="Submit"/>
               </form>
+                <GoogleLogin
+                    clientId="510672959009-nttaqi6o8v7s61fmlheuqp30pkndm3tj.apps.googleusercontent.com"
+                    buttonText="Login"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                />
             </div>
+
         );
     }
 }
