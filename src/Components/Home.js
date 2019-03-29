@@ -11,7 +11,7 @@ class Home extends Component{
 
     render() {
         return (
-            <div className="Main">
+            <div class="main">
                 <p>aa</p>
                 <p>{auth.getToken()}</p>
             </div>
