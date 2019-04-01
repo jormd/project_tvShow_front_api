@@ -75,7 +75,7 @@ class Login extends Component {
 
         return (
             <div class="main">
-                <div class="formMain">
+                <div class="formMain formLogin">
                     <h1>Connection</h1>
                     <form id="connection" onSubmit={this.handleSubmit}>
                         <div>
