@@ -87,7 +87,7 @@ class Login extends Component {
                         <div>
                             <p>
                                 Vous n'avez pas de compte?
-                                <a> Créé un compte</a>
+                                <a href="/CreateCompte"> Créé un compte</a>
                             </p>
                         </div>
                         <div class="loginButton">
