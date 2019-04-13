@@ -75,7 +75,7 @@ class Login extends Component {
 
         return (
             <div class="main">
-                <div class="formMain">
+                <div class="formMain formLogin">
                     <h1>Connection</h1>
                     <form id="connection" onSubmit={this.handleSubmit}>
                         <div>
@@ -87,7 +87,7 @@ class Login extends Component {
                         <div>
                             <p>
                                 Vous n'avez pas de compte?
-                                <a> Créé un compte</a>
+                                <a href="/CreateCompte"> Créé un compte</a>
                             </p>
                         </div>
                         <div class="loginButton">

@@ -9,7 +9,8 @@ import Home from "./Components/Home";
 import Login from "./Components/Login";
 import Logout from "./Components/Logout";
 import Error from "./Components/Error";
-import Default from "./Components/Default"
+import Default from "./Components/Default";
+import CreateCompte from "./Components/CreateCompte";
 
 const auth = new Auth();
 
@@ -55,6 +56,7 @@ class App extends Component {
                   <Route path="/" component={Default} exact />
                   <Route path="/login" component={Login} exact />
                   <Route path="/logout" component={Logout} exact />
+                  <Route path="/CreateCompte" component={CreateCompte} exact />
                   <PrivateRoute path="/home" component={Home} exact />
                   <Route component={Error} />
               </Switch>

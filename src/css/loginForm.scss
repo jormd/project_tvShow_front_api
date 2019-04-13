@@ -1,7 +1,28 @@
+.formLogin{
+  width: 30%;
+}
+
+.formCreateUser{
+  width: 60%;
+
+  form{
+    display: flex;
+    flex-direction: column;
+
+    div.alignRow{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      input{
+        width: 40%;
+      }
+    }
+  }
+}
+
 .formMain{
 
   background-color: white;
-  width: 30%;
   margin: auto;
   border-radius: 4px;
 
@@ -14,7 +35,7 @@
     text-align: center;
   }
 
-  form#connection{
+  form{
 
     div{
       text-align: center;
@@ -54,4 +75,10 @@
       }
     }
   }
+}
+
+p.infoPassword{
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 12px;
 }
