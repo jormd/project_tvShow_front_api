@@ -74,22 +74,34 @@ class Login extends Component {
         };
 
         return (
-            <div className="App">
-                <form id="connection" onSubmit={this.handleSubmit}>
-                  <label htmlFor="email">email</label>
-                  <input name="email" id="email" onChange={this.handleChange} type="email"/>
-                  <label htmlFor="password">mot de pass</label>
-                  <input name="password" id="password" onChange={this.handleChange} type="password"/>
-                  <input type="submit" value="Submit"/>
-              </form>
-                <GoogleLogin
-                    clientId="510672959009-nttaqi6o8v7s61fmlheuqp30pkndm3tj.apps.googleusercontent.com"
-                    buttonText="Login"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                />
+            <div class="main">
+                <div class="formMain">
+                    <h1>Connection</h1>
+                    <form id="connection" onSubmit={this.handleSubmit}>
+                        <div>
+                            <input name="email" id="email" onChange={this.handleChange} type="email" placeholder="email" />
+                        </div>
+                        <div>
+                            <input name="password" id="password" onChange={this.handleChange} type="password" placeholder="password" />
+                        </div>
+                        <div>
+                            <p>
+                                Vous n'avez pas de compte?
+                                <a> Créé un compte</a>
+                            </p>
+                        </div>
+                        <div class="loginButton">
+                            <GoogleLogin
+                                clientId="510672959009-nttaqi6o8v7s61fmlheuqp30pkndm3tj.apps.googleusercontent.com"
+                                buttonText="Google"
+                                onSuccess={responseGoogle}
+                                onFailure={responseGoogle}
+                            />
+                            <input type="submit" value="Connection"/>
+                        </div>
+                    </form>
+                </div>
             </div>
-
         );
     }
 }
