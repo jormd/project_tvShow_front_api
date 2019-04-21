@@ -31,7 +31,7 @@ class Login extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        fetch("http://127.0.0.1:8080/api/login", {
+        fetch(process.env.REACT_APP_URL+"/api/login", {
             method: "POST",
             headers: new Headers({
                 'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
@@ -48,8 +48,7 @@ class Login extends Component {
     }
 
     loginGoole(response){
-
-        fetch("http://127.0.0.1:8080/api/logingoogle", {
+        fetch(process.env.REACT_APP_URL+"/api/logingoogle", {
             method: "POST",
             headers: new Headers({
                 'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
