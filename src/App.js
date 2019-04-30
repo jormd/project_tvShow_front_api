@@ -11,6 +11,7 @@ import Logout from "./Components/Logout";
 import Error from "./Components/Error";
 import Default from "./Components/Default";
 import CreateCompte from "./Components/CreateCompte";
+import PageTvShow from "./Components/PageTvShow";
 
 const auth = new Auth();
 
@@ -58,6 +59,7 @@ class App extends Component {
                   <Route path="/logout" component={Logout} exact />
                   <Route path="/CreateCompte" component={CreateCompte} exact />
                   <PrivateRoute path="/home" component={Home} exact />
+                  <PrivateRoute path="/tvshow/:handle" component={PageTvShow} exact />
                   <Route component={Error} />
               </Switch>
           </BrowserRouter>

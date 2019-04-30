@@ -38,7 +38,7 @@ class Home extends Component{
                     let self = this;
 
                     Object.values(response.content).map(function (serie) {
-                        self.displayData.push(<CardTvShow name={serie['name']} url={serie["img"]}/>);
+                        self.displayData.push(<CardTvShow id={serie['id']} name={serie['name']} url={serie["img"]}/>);
                     });
 
                     //maj showdata

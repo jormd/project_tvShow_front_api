@@ -7,7 +7,7 @@ class CardTvShow extends Component{
 
     render() {
         return (
-            <div id="cardbox">
+            <div id="cardbox" data-id={this.props.id}>
                 <img src={this.props.url}
                     alt={this.props.name}
                      width="200" height="200"
