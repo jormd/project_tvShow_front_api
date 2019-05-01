@@ -19,14 +19,22 @@
   .episode{
     background-color: $icon;
     border-radius: 4px;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
     height: 30px;
     width: 40%;
     margin-left: 10px;
     p{
       padding: 5px;
       color: #212121;
+      align-self: center;
     }
+    i{
+      padding: 5px;
+      align-self: end;
+    }
+
+    display: flex;
+    justify-content: space-between;
   }
 }
 

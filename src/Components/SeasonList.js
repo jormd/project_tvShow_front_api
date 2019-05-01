@@ -5,9 +5,11 @@ class SeasonList extends Component {
     constructor(props) {
         super(props);
 
+        let self = this;
+
         this.state = {
             episodes : this.props.episodes.map(function (episode) {
-                return <ListEpisode name={episode['name']}/>
+                return <ListEpisode idSerie={self.props.idSerie} name={episode['name']} see={episode['see']} id={episode['id']}/>
             })
         }
     }

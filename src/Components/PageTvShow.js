@@ -27,6 +27,8 @@ class PageTvShow extends Component{
         // permet de passer le this du constructeur
         this.recuperationSerie = this.recuperationSerie.bind(this);
         this.changeSeason = this.changeSeason.bind(this);
+        this.follow = this.follow.bind(this);
+
         //appel de la méthode pour l'initialisation
         this.recuperationSerie();
     }
@@ -57,7 +59,7 @@ class PageTvShow extends Component{
                         self.state.img = serie.img;
 
                         self.state.seasons = Object.values(serie.season).map(function (season, index) {
-                            self.displayData.push(<SeasonList nbSaison={index+1} nbEpisode={Object.values(season)[0]} episodes={Object.values(Object.values(season)[1])} />);
+                            self.displayData.push(<SeasonList idSerie={serie.id} nbSaison={index+1} nbEpisode={Object.values(season)[0]} episodes={Object.values(Object.values(season)[1])} />);
                             return <li onClick={self.changeSeason.bind(self, index+1)}>Saison {index+1} </li>;
 
                         });
@@ -86,6 +88,42 @@ class PageTvShow extends Component{
         }
     }
 
+    follow(){
+        var berar = 'Bearer '+auth.getToken();
+        if(this.state.follow){
+            fetch("http://127.0.0.1:8080/api/unfollow/serie", {
+                method: "POST",
+                headers: new Headers({
+                    'Authorization': berar,
+                    'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
+                }),
+                body : "serie[id]="+this.state.idSerie
+            }).then(response => response.json())
+                .then(response => {
+                    if(response.code === "success") {
+                        document.getElementById('btnFollow').innerHTML = "Follow";
+
+                    }
+                });
+        }
+        else{
+            fetch("http://127.0.0.1:8080/api/follow/serie", {
+                method: "POST",
+                headers: new Headers({
+                    'Authorization': berar,
+                    'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
+                }),
+                body : "serie[id]="+this.state.idSerie+"&serie[name]="+this.state.name
+            }).then(response => response.json())
+                .then(response => {
+                    if(response.code === "success") {
+                        document.getElementById('btnFollow').innerHTML = "Unfollow";
+                    }
+
+                });
+        }
+    }
+
 
 
     render() {
@@ -101,7 +139,7 @@ class PageTvShow extends Component{
                             <p>{this.state.create}</p>
                         </div>
                         <div class="content">
-                            <button class="follow">Follow</button>
+                            <button id="btnFollow" class="follow" onClick={this.follow}>{this.state.follow ? "Unfollow" : "Follow"}</button>
 
                             <span class="resumer">Resumer :</span>
                             {this.state.resumer}

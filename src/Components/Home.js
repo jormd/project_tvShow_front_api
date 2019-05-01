@@ -55,8 +55,6 @@ class Home extends Component{
     render() {
         return (
             <div class="main">
-                <p>aa</p>
-                <p>{auth.getToken()}</p>
                 <div id="series">{this.displayData}</div>
                 <div id="loader">
                     <Loader
