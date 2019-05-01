@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Loader from 'react-loader-spinner'
 
 import Auth from "./../auth";
+import SeasonList from "./SeasonList";
 import CardTvShow from "./CardTvShow";
 
 const auth = new Auth();
@@ -9,6 +10,8 @@ const auth = new Auth();
 class PageTvShow extends Component{
     constructor(props) {
         super(props);
+
+        this.displayData = [];
 
         this.state = {
             idSerie : this.props.match.params.handle,
@@ -18,10 +21,12 @@ class PageTvShow extends Component{
             follow : '',
             create : '',
             img : '',
+            seasons : ''
         };
 
         // permet de passer le this du constructeur
         this.recuperationSerie = this.recuperationSerie.bind(this);
+        this.changeSeason = this.changeSeason.bind(this);
         //appel de la méthode pour l'initialisation
         this.recuperationSerie();
     }
@@ -40,7 +45,6 @@ class PageTvShow extends Component{
         }).then(response => response.json())
             .then(response => {
                 if(response.code === "success"){
-                    console.log(Object.values(response.content));
 
                     let self = this;
 
@@ -51,15 +55,38 @@ class PageTvShow extends Component{
                         self.state.follow = serie.follow;
                         self.state.create = serie.create;
                         self.state.img = serie.img;
+
+                        self.state.seasons = Object.values(serie.season).map(function (season, index) {
+                            self.displayData.push(<SeasonList nbSaison={index+1} nbEpisode={Object.values(season)[0]} episodes={Object.values(Object.values(season)[1])} />);
+                            return <li onClick={self.changeSeason.bind(self, index+1)}>Saison {index+1} </li>;
+
+                        });
                     });
 
-                    this.setState({postVal : ""});
-
+                    this.setState({
+                        showdata : this.displayData,
+                        postVal : ""
+                    });
+                    this.changeSeason(1);
                     document.getElementById('tvShowOne').classList.remove("visibilityOff");
                     document.getElementById('loader').remove();
                 }
             });
     }
+
+    changeSeason(index){
+        var saisons = document.getElementsByClassName('saison');
+        for(let saison of saisons){
+            if(saison.getAttribute('data-id') != index){
+                saison.classList.add("visibilityOff");
+            }
+            else{
+                saison.classList.remove("visibilityOff");
+            }
+        }
+    }
+
+
 
     render() {
         return (
@@ -78,7 +105,14 @@ class PageTvShow extends Component{
 
                             <span class="resumer">Resumer :</span>
                             {this.state.resumer}
+                            <ul class="listSaison">{this.state.seasons}</ul>
+                            <div>
+                                {this.displayData}
+                            </div>
                         </div>
+
+
+
                     </div>
                 </div>
                 <div id="loader">
