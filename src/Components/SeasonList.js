@@ -8,8 +8,8 @@ class SeasonList extends Component {
         let self = this;
 
         this.state = {
-            episodes : this.props.episodes.map(function (episode) {
-                return <ListEpisode idSerie={self.props.idSerie} name={episode['name']} see={episode['see']} id={episode['id']}/>
+            episodes : this.props.episodes.map(function (episode, index) {
+                return <ListEpisode idSerie={self.props.idSerie} name={episode['name']} see={episode['see']} id={episode['id']} episode={index+1} saison={self.props.nbSaison}  />
             })
         }
     }

@@ -1,5 +1,7 @@
 import React, {Component} from "react";
+import * as ReactDom from "react-dom";
 import Auth from "./../auth";
+import InfoEpisode from "./InfoEpisode";
 const auth = new Auth();
 
 
@@ -8,6 +10,7 @@ class ListEpisode extends Component {
         super(props);
 
         this.checkEpisode = this.checkEpisode.bind(this);
+        this.infoEpisode = this.infoEpisode.bind(this);
     }
 
     checkEpisode(idEpisode, idSerie){
@@ -48,10 +51,32 @@ class ListEpisode extends Component {
 
     }
 
+    infoEpisode(idEpisode, idSerie, saison){
+        var berar = 'Bearer '+auth.getToken();
+        fetch("http://127.0.0.1:8080/api/info/episode", {
+            method: "POST",
+            headers: new Headers({
+                'Authorization': berar,
+                'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
+            }),
+            body : "episode[episode]="+idEpisode+"&episode[idSerie]="+idSerie+"&episode[saison]="+saison
+        }).then(response => response.json())
+            .then(response => {
+                if(response.code === "success") {
+                    let popIn = document.getElementById('popIn');
+                   popIn.classList.remove("visibilityOff");
+                   ReactDom.render(<InfoEpisode name={response.content['name']} summary={response.content['summary']} commentaire={response.content['commentaire']}/>, popIn);
+
+                   //this.props.infoEpisodepop.push(<infoEpisode name={response.content['name']} summary={response.content['summary']} commentaire={response.content['commentaire']}/>)
+                }
+            });
+
+    }
+
     render() {
         return (
             <div class="episode" data-id={this.props.id}>
-                <p>{this.props.name}</p>
+                <p onClick={this.infoEpisode.bind(this, this.props.episode, this.props.idSerie, this.props.saison)}>{this.props.name}</p>
                 <i id="oeil" className="material-icons" onClick={this.checkEpisode.bind(this, this.props.id, this.props.idSerie)}>{this.props.see ? "visibility_off":"visibility"}</i>
             </div>
 

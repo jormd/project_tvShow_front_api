@@ -153,6 +153,9 @@ class PageTvShow extends Component{
 
                     </div>
                 </div>
+
+                <div id="popIn" class="visibilityOff"></div>
+
                 <div id="loader">
                     <Loader
                         type="CradleLoader"
