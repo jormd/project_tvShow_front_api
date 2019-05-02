@@ -31,7 +31,7 @@ class CreateCompte extends Component {
         console.log(this.state.firstname);
         if(this.state.plainPassword === this.state.password){
 
-            fetch("http://127.0.0.1:8080/api/create/user", {
+            fetch(process.env.REACT_APP_URL+"/api/create/user", {
                 method: "POST",
                 headers: new Headers({
                     'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
