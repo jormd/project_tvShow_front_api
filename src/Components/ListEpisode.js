@@ -34,7 +34,6 @@ class ListEpisode extends Component {
                         let episodes = document.getElementsByClassName("episode");
                         for(let episode of episodes){
                             if(episode.getAttribute('data-id') == idEpisode){
-                                console.log('in');
                                 episode.getElementsByClassName("material-icons").item(0).innerHTML="visibility"
                             }
                         }
@@ -56,7 +55,6 @@ class ListEpisode extends Component {
                         let episodes = document.getElementsByClassName("episode");
                         for(let episode of episodes){
                             if(episode.getAttribute('data-id') == idEpisode){
-                                console.log('in');
                                 episode.getElementsByClassName("material-icons").item(0).innerHTML="visibility_off"
                             }
                         }

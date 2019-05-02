@@ -27,23 +27,23 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 class App extends Component {
 
     navRender(){
-        if(auth.getAuthentificate()){
+        if(auth.getAuthentificate() == 'true'){
             return [
                 <div>
-                    <Link to={'/'} className="nav-link"><i className="material-icons">home</i></Link>
+                    <Link to={'/home'} className="nav-link"><i className="material-icons">home</i></Link>
                 </div>,
                 <div>
-                    <Link to={'/login'} className="nav-link"> Login </Link>
-                </div>];
+                    <Link to={'/logout'} className="nav-link">Logout</Link>
+                </div>
+            ];
         }
         return [
             <div>
-                <Link to={'/home'} className="nav-link"><i className="material-icons">home</i></Link>
+                <Link to={'/'} className="nav-link"><i className="material-icons">home</i></Link>
             </div>,
             <div>
-                <Link to={'/logout'} className="nav-link">Logout</Link>
-            </div>
-        ];
+                <Link to={'/login'} className="nav-link"> Login </Link>
+            </div>];
     }
 
   render() {

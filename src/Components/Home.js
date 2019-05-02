@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner'
-import * as ReactDOM  from 'react-dom';
-
 import Auth from "./../auth";
 import CardTvShow from "./CardTvShow";
 
