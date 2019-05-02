@@ -11,8 +11,8 @@ class Commentaire extends Component{
     render() {
         return (
             <div>
-                <p>{this.state.message}</p>
-                <p>{this.state.author}</p>
+                <p>{this.props.message}</p>
+                <p>{this.props.author}</p>
             </div>
 
         );

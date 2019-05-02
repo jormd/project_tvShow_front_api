@@ -65,9 +65,7 @@ class ListEpisode extends Component {
                 if(response.code === "success") {
                     let popIn = document.getElementById('popIn');
                    popIn.classList.remove("visibilityOff");
-                   ReactDom.render(<InfoEpisode name={response.content['name']} summary={response.content['summary']} commentaire={response.content['commentaire']}/>, popIn);
-
-                   //this.props.infoEpisodepop.push(<infoEpisode name={response.content['name']} summary={response.content['summary']} commentaire={response.content['commentaire']}/>)
+                   ReactDom.render(<InfoEpisode idEpisode={response.content['idEpisode']} name={response.content['name']} summary={response.content['summary']} commentaire={response.content['commentaire']}/>, popIn);
                 }
             });
 
