@@ -21,7 +21,7 @@ class InfoEpisode extends Component{
         let com = document.getElementById("textarea").value;
 
         var berar = 'Bearer '+auth.getToken();
-        fetch("http://127.0.0.1:8080/api/commentaire/episode/add", {
+        fetch(process.env.REACT_APP_URL+"/api/commentaire/episode/add", {
             method: "POST",
             headers: new Headers({
                 'Authorization': berar,

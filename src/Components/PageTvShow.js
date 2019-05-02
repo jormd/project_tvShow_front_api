@@ -37,7 +37,7 @@ class PageTvShow extends Component{
 
     recuperationSerie(){
         var berar = 'Bearer '+auth.getToken();
-        fetch("http://127.0.0.1:8080/api/find/serie", {
+        fetch(process.env.REACT_APP_URL+"/api/find/serie", {
             method: "POST",
             headers: new Headers({
                 'Authorization': berar,
@@ -91,7 +91,7 @@ class PageTvShow extends Component{
     follow(){
         var berar = 'Bearer '+auth.getToken();
         if(this.state.follow){
-            fetch("http://127.0.0.1:8080/api/unfollow/serie", {
+            fetch(process.env.REACT_APP_URL+"/api/unfollow/serie", {
                 method: "POST",
                 headers: new Headers({
                     'Authorization': berar,
@@ -107,7 +107,7 @@ class PageTvShow extends Component{
                 });
         }
         else{
-            fetch("http://127.0.0.1:8080/api/follow/serie", {
+            fetch(process.env.REACT_APP_URL+"/api/follow/serie", {
                 method: "POST",
                 headers: new Headers({
                     'Authorization': berar,

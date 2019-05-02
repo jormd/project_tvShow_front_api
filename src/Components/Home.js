@@ -24,7 +24,7 @@ class Home extends Component{
 
     recuperationSerie(){
         var berar = 'Bearer '+auth.getToken();
-        fetch("http://127.0.0.1:8080/api/series/all", {
+        fetch(process.env.REACT_APP_URL+"/api/series/all", {
             method: "GET",
             headers: new Headers({
                 'Authorization': berar,

@@ -21,7 +21,7 @@ class ListEpisode extends Component {
         var berar = 'Bearer '+auth.getToken();
 
         if(this.state.see){
-            fetch("http://127.0.0.1:8080/api/uncheck/episode", {
+            fetch(process.env.REACT_APP_URL+"/api/uncheck/episode", {
                 method: "POST",
                 headers: new Headers({
                     'Authorization': berar,
@@ -42,7 +42,7 @@ class ListEpisode extends Component {
                 });
         }
         else{
-            fetch("http://127.0.0.1:8080/api/check/episode", {
+            fetch(process.env.REACT_APP_URL+"/api/check/episode", {
                 method: "POST",
                 headers: new Headers({
                     'Authorization': berar,
@@ -67,7 +67,7 @@ class ListEpisode extends Component {
 
     infoEpisode(idEpisode, idSerie, saison){
         var berar = 'Bearer '+auth.getToken();
-        fetch("http://127.0.0.1:8080/api/info/episode", {
+        fetch(process.env.REACT_APP_URL+"/api/info/episode", {
             method: "POST",
             headers: new Headers({
                 'Authorization': berar,
