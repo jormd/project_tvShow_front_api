@@ -9,6 +9,10 @@ class ListEpisode extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            see : this.props.see
+        }
+
         this.checkEpisode = this.checkEpisode.bind(this);
         this.infoEpisode = this.infoEpisode.bind(this);
     }
@@ -16,7 +20,7 @@ class ListEpisode extends Component {
     checkEpisode(idEpisode, idSerie){
         var berar = 'Bearer '+auth.getToken();
 
-        if(this.props.see){
+        if(this.state.see){
             fetch("http://127.0.0.1:8080/api/uncheck/episode", {
                 method: "POST",
                 headers: new Headers({
@@ -27,8 +31,14 @@ class ListEpisode extends Component {
             }).then(response => response.json())
                 .then(response => {
                     if(response.code === "success") {
-                        console.log('in');
-                        document.getElementById("oeil").innerHTML="visibility";
+                        let episodes = document.getElementsByClassName("episode");
+                        for(let episode of episodes){
+                            if(episode.getAttribute('data-id') == idEpisode){
+                                console.log('in');
+                                episode.getElementsByClassName("material-icons").item(0).innerHTML="visibility"
+                            }
+                        }
+                        this.state.see = false;
                     }
                 });
         }
@@ -43,9 +53,15 @@ class ListEpisode extends Component {
             }).then(response => response.json())
                 .then(response => {
                     if(response.code === "success") {
-                        console.log('aa');
-                        document.getElementById("oeil").innerHTML="visibility_off";
+                        let episodes = document.getElementsByClassName("episode");
+                        for(let episode of episodes){
+                            if(episode.getAttribute('data-id') == idEpisode){
+                                console.log('in');
+                                episode.getElementsByClassName("material-icons").item(0).innerHTML="visibility_off"
+                            }
+                        }
                     }
+                    this.state.see = true;
                 });
         }
 
@@ -75,7 +91,7 @@ class ListEpisode extends Component {
         return (
             <div class="episode" data-id={this.props.id}>
                 <p onClick={this.infoEpisode.bind(this, this.props.episode, this.props.idSerie, this.props.saison)}>{this.props.name}</p>
-                <i id="oeil" className="material-icons" onClick={this.checkEpisode.bind(this, this.props.id, this.props.idSerie)}>{this.props.see ? "visibility_off":"visibility"}</i>
+                <i id="oeil" className="material-icons" onClick={this.checkEpisode.bind(this, this.props.id, this.props.idSerie)}>{this.state.see ? "visibility_off":"visibility"}</i>
             </div>
 
         );
