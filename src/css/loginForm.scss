@@ -1,0 +1,84 @@
+.formLogin{
+  width: 30%;
+}
+
+.formCreateUser{
+  width: 60%;
+
+  form{
+    display: flex;
+    flex-direction: column;
+
+    div.alignRow{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      input{
+        width: 40%;
+      }
+    }
+  }
+}
+
+.formMain{
+
+  background-color: white;
+  margin: auto;
+  border-radius: 4px;
+
+  -webkit-box-shadow: 0px 0px 20px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 20px -9px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 20px -9px rgba(0,0,0,0.75);
+
+  h1{
+    padding-top: 5px;
+    text-align: center;
+  }
+
+  form{
+
+    div{
+      text-align: center;
+    }
+    input{
+      outline: 0;
+      background: $icon;
+      width: 90%;
+      border: 0;
+      margin: 0 0 15px;
+      padding: 15px;
+      box-sizing: border-box;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    div.loginButton{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      * {
+        width: 34%;
+      }
+
+      input {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
+        background-color: white;
+      }
+      button{
+        height: 47px;
+        background-color: #dd4b39!important;
+        div{
+          background-color: #dd4b39!important;
+        }
+        span{
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+p.infoPassword{
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 12px;
+}
