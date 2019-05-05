@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Commentaire from "./Commentaire";
+import ReactHtml from 'raw-html-react';
+
 import Auth from "./../auth";
 const auth = new Auth();
 
@@ -41,7 +43,7 @@ class InfoEpisode extends Component{
             <div class="infoEpisode">
                 <span className="close">&times;</span>
                 <p class="title">{this.props.name}</p>
-                <div>{this.props.summary}</div>
+                <ReactHtml html={this.props.summary}/>
                 <div>{this.state.commentaires}</div>
                 <div>
                     <textarea id="textarea" placeholder="Commentaire"></textarea>

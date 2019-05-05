@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner'
+import ReactHtml from 'raw-html-react';
 
 import Auth from "./../auth";
 import SeasonList from "./SeasonList";
@@ -142,7 +143,7 @@ class PageTvShow extends Component{
                             <button id="btnFollow" class="follow" onClick={this.follow}>{this.state.follow ? "Unfollow" : "Follow"}</button>
 
                             <span class="resumer">Resumer :</span>
-                            {this.state.resumer}
+                            <ReactHtml html={this.state.resumer}/>
                             <ul class="listSaison">{this.state.seasons}</ul>
                             <div>
                                 {this.displayData}
