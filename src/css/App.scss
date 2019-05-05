@@ -5,6 +5,7 @@
 @import "pageTvShow";
 @import "Saison";
 @import "pop";
+@import "Rechercher";
 
 body{
   background-color: $background;
@@ -57,4 +58,7 @@ body{
 
 .visibilityOff{
   display: none;
+}
+#cardbox, ul.listSaison li, #oeil, .episode p{
+  cursor: pointer;
 }

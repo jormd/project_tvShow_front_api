@@ -12,6 +12,7 @@ import Error from "./Components/Error";
 import Default from "./Components/Default";
 import CreateCompte from "./Components/CreateCompte";
 import PageTvShow from "./Components/PageTvShow";
+import Search from "./Components/Search";
 
 const auth = new Auth();
 
@@ -31,6 +32,9 @@ class App extends Component {
             return [
                 <div>
                     <Link to={'/home'} className="nav-link"><i className="material-icons">home</i></Link>
+                </div>,
+                <div>
+                    <Link to={'/search'} className="nav-link"><i className="material-icons">search</i></Link>
                 </div>,
                 <div>
                     <Link to={'/logout'} className="nav-link">Logout</Link>
@@ -60,6 +64,7 @@ class App extends Component {
                   <Route path="/CreateCompte" component={CreateCompte} exact />
                   <PrivateRoute path="/home" component={Home} exact />
                   <PrivateRoute path="/tvshow/:handle" component={PageTvShow} exact />
+                  <PrivateRoute path="/search" component={Search} exact />
                   <Route component={Error} />
               </Switch>
           </BrowserRouter>
