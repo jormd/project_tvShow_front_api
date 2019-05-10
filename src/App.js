@@ -11,6 +11,8 @@ import Logout from "./Components/Logout";
 import Error from "./Components/Error";
 import Default from "./Components/Default";
 import CreateCompte from "./Components/CreateCompte";
+import PageTvShow from "./Components/PageTvShow";
+import Search from "./Components/Search";
 
 const auth = new Auth();
 
@@ -26,23 +28,26 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 class App extends Component {
 
     navRender(){
-        if(auth.getAuthentificate()){
+        if(auth.getAuthentificate() == 'true'){
             return [
                 <div>
-                    <Link to={'/'} className="nav-link"><i className="material-icons">home</i></Link>
+                    <Link to={'/home'} className="nav-link"><i className="material-icons">home</i></Link>
                 </div>,
                 <div>
-                    <Link to={'/login'} className="nav-link"> Login </Link>
-                </div>];
+                    <Link to={'/search'} className="nav-link"><i className="material-icons">search</i></Link>
+                </div>,
+                <div>
+                    <Link to={'/logout'} className="nav-link">Logout</Link>
+                </div>
+            ];
         }
         return [
             <div>
-                <Link to={'/home'} className="nav-link"><i className="material-icons">home</i></Link>
+                <Link to={'/'} className="nav-link"><i className="material-icons">home</i></Link>
             </div>,
             <div>
-                <Link to={'/logout'} className="nav-link">Logout</Link>
-            </div>
-        ];
+                <Link to={'/login'} className="nav-link"> Login </Link>
+            </div>];
     }
 
   render() {
@@ -58,6 +63,8 @@ class App extends Component {
                   <Route path="/logout" component={Logout} exact />
                   <Route path="/CreateCompte" component={CreateCompte} exact />
                   <PrivateRoute path="/home" component={Home} exact />
+                  <PrivateRoute path="/tvshow/:handle" component={PageTvShow} exact />
+                  <PrivateRoute path="/search" component={Search} exact />
                   <Route component={Error} />
               </Switch>
           </BrowserRouter>

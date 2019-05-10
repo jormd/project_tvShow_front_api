@@ -1,6 +1,11 @@
 @import "variable";
 @import "navbar";
 @import "loginForm";
+@import "Card";
+@import "pageTvShow";
+@import "Saison";
+@import "pop";
+@import "Rechercher";
 
 body{
   background-color: $background;
@@ -44,4 +49,16 @@ body{
   margin-top: 3em;
   margin-left: 5em;
   margin-right: 5em;
+}
+
+#series{
+ display: grid;
+  grid-template-columns: repeat(4, 2fr);
+}
+
+.visibilityOff{
+  display: none;
+}
+#cardbox, ul.listSaison li, #oeil, .episode p{
+  cursor: pointer;
 }

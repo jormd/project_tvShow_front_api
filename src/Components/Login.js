@@ -43,6 +43,7 @@ class Login extends Component {
                     auth.setAuthentificate(true);
                     auth.setToken(response.tokenJWT);
                     this.props.history.push('/home');
+                    window.location.reload();
                 }
             });
     }
@@ -62,6 +63,7 @@ class Login extends Component {
                 auth.setAuthentificate(true);
                 auth.setToken(response.tokenJWT);
                 this.props.history.push('/home');
+                window.location.reload();
             }
         });
     }

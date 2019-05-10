@@ -13,6 +13,7 @@ class Logout extends Component{
        auth.setAuthentificate(false);
        auth.setToken('');
        this.props.history.push('/');
+        window.location.reload();
 
        return null;
     }

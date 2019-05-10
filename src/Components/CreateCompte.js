@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import auth from "../auth";
 
 class CreateCompte extends Component {
 

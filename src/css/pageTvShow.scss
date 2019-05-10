@@ -1,0 +1,29 @@
+.container{
+  display: flex;
+  flex-direction: row;
+}
+
+.titleTvShow{
+  text-align: center;
+
+}
+
+.content{
+  margin-left: 24px;
+  width: 100%;
+  .follow{
+    position: absolute;
+    margin-left: 60%;
+    padding: 3px;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: $backgroundNav;
+    color: white;
+    font-weight: bold;
+    top: 99px
+  }
+  .resumer{
+    text-decoration: underline;
+  }
+}
