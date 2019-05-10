@@ -13,6 +13,7 @@ import Default from "./Components/Default";
 import CreateCompte from "./Components/CreateCompte";
 import PageTvShow from "./Components/PageTvShow";
 import Search from "./Components/Search";
+import ProfileUser from "./Components/ProfileUser";
 
 const auth = new Auth();
 
@@ -65,6 +66,7 @@ class App extends Component {
                   <PrivateRoute path="/home" component={Home} exact />
                   <PrivateRoute path="/tvshow/:handle" component={PageTvShow} exact />
                   <PrivateRoute path="/search" component={Search} exact />
+                  <PrivateRoute path="/profileuser/:handle" component={ProfileUser} exact />
                   <Route component={Error} />
               </Switch>
           </BrowserRouter>
