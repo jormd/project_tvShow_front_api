@@ -15,6 +15,7 @@ class ProfileUser extends Component{
         };
 
         this.recuperationUser = this.recuperationUser.bind(this);
+        this.addAmie = this.addAmie.bind(this);
 
         this.recuperationUser();
     }
@@ -35,7 +36,10 @@ class ProfileUser extends Component{
                     let self = this;
 
                     Object.values(response.content).map(function (user) {
-                        self.state.name = user.name
+                        self.state.name = user.name;
+                        if(typeof(user.suivre) !== "undefined"){
+                            self.state.suivre = user.suivre;
+                        }
                     });
 
                     this.setState({
@@ -49,12 +53,56 @@ class ProfileUser extends Component{
             });
     }
 
+    addAmie()
+    {
+        var berar = 'Bearer '+auth.getToken();
+        if(this.state.friend){
+            fetch(process.env.REACT_APP_URL+"/api/remove/friend", {
+                method: "POST",
+                headers: new Headers({
+                    'Authorization': berar,
+                    'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
+                }),
+                body : "friend="+this.state.idUser
+            }).then(response => response.json())
+                .then(response => {
+                    if(response.code === "success") {
+                        document.getElementById('btnFollow').innerHTML = "suivre";
+                        this.state.friend = false;
+                    }
+                });
+        }
+        else{
+            fetch(process.env.REACT_APP_URL+"/api/add/friend", {
+                method: "POST",
+                headers: new Headers({
+                    'Authorization': berar,
+                    'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
+                }),
+                body : "friend="+this.state.idUser
+            }).then(response => response.json())
+                .then(response => {
+                    if(response.code === "success") {
+                        document.getElementById('btnFollow').innerHTML = "ne plus suivre";
+                        this.state.friend = true;
+
+                    }
+
+                });
+        }
+    }
 
     render() {
         return (
             <div className="main ">
                 <div id="profile" className="visibilityOff">
-                    <p>{this.props.name}</p>
+                    <p>{this.state.name}</p>
+                    {typeof(this.state.suivre) !== "undefined" &&
+                    <button id="btnFollow" className="follow"
+                            onClick={this.addAmie}>{this.state.suivre ? "ne plus suivre" : "suivre"}</button>
+                    }
+
+
                 </div>
                 <div id="loader">
                     <Loader
