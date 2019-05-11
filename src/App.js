@@ -38,6 +38,9 @@ class App extends Component {
                     <Link to={'/search'} className="nav-link"><i className="material-icons">search</i></Link>
                 </div>,
                 <div>
+                    <Link to={'/profileuser/'+auth.getId()} className="nav-link"><i className="material-icons">settings</i></Link>
+                </div>,
+                <div>
                     <Link to={'/logout'} className="nav-link">Logout</Link>
                 </div>
             ];

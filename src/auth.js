@@ -15,4 +15,12 @@ export default class AuthHelperMethods {
         // Retrieves the user token from localStorage
         return localStorage.getItem("id_token");
     };
+
+    getId = () => {
+        return localStorage.getItem('id_user');
+    };
+
+    setId = id => {
+        return localStorage.setItem('id_user', id);
+    };
 }
