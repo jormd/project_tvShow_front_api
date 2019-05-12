@@ -21,6 +21,7 @@ class ProfileUser extends Component{
         this.addAmie = this.addAmie.bind(this);
         this.addGenre = this.addGenre.bind(this);
         this.saveGenre = this.saveGenre.bind(this);
+        this.closePopIn = this.closePopIn.bind(this);
 
         this.recuperationUser();
     }
@@ -149,6 +150,10 @@ class ProfileUser extends Component{
             });
     }
 
+    closePopIn(){
+        document.getElementById('popIn').classList.add('visibilityOff')
+    }
+
     render() {
         return (
             <div className="main ">
@@ -162,19 +167,21 @@ class ProfileUser extends Component{
                 </div>
 
                 <div id="popIn" className="visibilityOff">
-                    <select id={"selectGenre"} multiple>
-                        <option selected={this.state.genreList.indexOf('action') > -1}>action</option>
-                        <option selected={this.state.genreList.indexOf('adventure') > -1}>adventure</option>
-                        <option selected={this.state.genreList.indexOf('espionnage') > -1}>espionnage</option>
-                        <option selected={this.state.genreList.indexOf('comédie') > -1}>comédie</option>
-                        <option selected={this.state.genreList.indexOf('drame') > -1}>drame</option>
-                        <option selected={this.state.genreList.indexOf('fantastique') > -1}>fantastique</option>
-                        <option selected={this.state.genreList.indexOf('horreur') > -1}>horreur</option>
-                        <option selected={this.state.genreList.indexOf('policier') > -1}>policier</option>
-                        <option selected={this.state.genreList.indexOf('amédical') > -1}>médical</option>
-                    </select>
-
-                    <button onClick={this.saveGenre}>Sauvegardé</button>
+                    <div className="formSerie">
+                        <span className="close" onClick={this.closePopIn}>&times;</span>
+                        <select id={"selectGenre"} multiple>
+                            <option selected={this.state.genreList.indexOf('action') > -1}>action</option>
+                            <option selected={this.state.genreList.indexOf('adventure') > -1}>adventure</option>
+                            <option selected={this.state.genreList.indexOf('espionnage') > -1}>espionnage</option>
+                            <option selected={this.state.genreList.indexOf('comédie') > -1}>comédie</option>
+                            <option selected={this.state.genreList.indexOf('drame') > -1}>drame</option>
+                            <option selected={this.state.genreList.indexOf('fantastique') > -1}>fantastique</option>
+                            <option selected={this.state.genreList.indexOf('horreur') > -1}>horreur</option>
+                            <option selected={this.state.genreList.indexOf('policier') > -1}>policier</option>
+                            <option selected={this.state.genreList.indexOf('amédical') > -1}>médical</option>
+                        </select>
+                        <button onClick={this.saveGenre}>Sauvegardé</button>
+                    </div>
                 </div>
 
                 <div id="loader">

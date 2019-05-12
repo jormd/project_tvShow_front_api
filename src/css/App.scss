@@ -6,6 +6,7 @@
 @import "Saison";
 @import "pop";
 @import "Rechercher";
+@import "Profile";
 
 body{
   background-color: $background;
@@ -59,6 +60,11 @@ body{
 .visibilityOff{
   display: none;
 }
-#cardbox, ul.listSaison li, #oeil, .episode p{
+#cardbox, ul.listSaison li, #oeil, .episode p, .close{
   cursor: pointer;
+}
+
+#loader{
+  display: flex;
+  justify-content: center;
 }

@@ -3,3 +3,14 @@
     list-style: none;
   }
 }
+
+.formSerie{
+  background-color: white;
+  margin: auto;
+  border: 1px solid;
+  width: 80%;
+  border-radius: 4px;
+
+  display: flex;
+  flex-direction: column;
+}
