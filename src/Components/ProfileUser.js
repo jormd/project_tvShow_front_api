@@ -38,9 +38,7 @@ class ProfileUser extends Component{
         }).then(response => response.json())
             .then(response => {
                 if(response.code === "success"){
-
                     let self = this;
-
                     Object.values(response.content).map(function (user) {
                         self.state.name = user.name;
                         if(typeof(user.suivre) !== "undefined"){
@@ -54,9 +52,6 @@ class ProfileUser extends Component{
                                 return name
                             });
                         }
-                        console.log(self.state.genreList);
-                        console.log(self.state.genreList.indexOf('aventure'));
-
                     });
 
                     this.setState({
@@ -140,7 +135,6 @@ class ProfileUser extends Component{
                         return <li>{name}</li>
                     });
                     this.state.genreList = genres;
-                    console.log(this.state.genreList);
                 }
 
                 this.setState({
@@ -162,7 +156,9 @@ class ProfileUser extends Component{
                     {typeof(this.state.suivre) !== "undefined" &&
                         <button id="btnFollow" className="follow" onClick={this.addAmie}>{this.state.suivre ? "ne plus suivre" : "suivre"}</button>
                     }
-                    <button onClick={this.addGenre}>ajout de genre</button>
+                    {typeof (this.state.suivre) == "undefined" &&
+                        <button onClick={this.addGenre}>ajout de genre</button>
+                    }
                     <ul>{this.state.genre}</ul>
                 </div>
 
