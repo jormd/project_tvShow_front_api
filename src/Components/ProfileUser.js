@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Auth from "./../auth";
 import Loader from "react-loader-spinner";
+import SeasonList from "./SeasonList";
 
 const auth = new Auth();
 
@@ -11,11 +12,16 @@ class ProfileUser extends Component{
         this.state = {
             idUser : this.props.match.params.handle,
             name : '',
-            friend: ''
+            friend: '',
+            genre: '',
+            genreList : ''
         };
 
         this.recuperationUser = this.recuperationUser.bind(this);
         this.addAmie = this.addAmie.bind(this);
+        this.addGenre = this.addGenre.bind(this);
+        this.saveGenre = this.saveGenre.bind(this);
+        this.closePopIn = this.closePopIn.bind(this);
 
         this.recuperationUser();
     }
@@ -32,13 +38,19 @@ class ProfileUser extends Component{
         }).then(response => response.json())
             .then(response => {
                 if(response.code === "success"){
-
                     let self = this;
-
                     Object.values(response.content).map(function (user) {
                         self.state.name = user.name;
                         if(typeof(user.suivre) !== "undefined"){
                             self.state.suivre = user.suivre;
+                        }console.log(user);
+                        if(typeof(user.genre) !== "undefined"){
+                            self.state.genre = Object.values(user.genre).map(function (name) {
+                                return <li>{name}</li>;
+                            });
+                            self.state.genreList = Object.values(user.genre).map(function (name) {
+                                return name
+                            });
                         }
                     });
 
@@ -53,8 +65,7 @@ class ProfileUser extends Component{
             });
     }
 
-    addAmie()
-    {
+    addAmie() {
         var berar = 'Bearer '+auth.getToken();
         if(this.state.friend){
             fetch(process.env.REACT_APP_URL+"/api/remove/friend", {
@@ -92,18 +103,83 @@ class ProfileUser extends Component{
         }
     }
 
+    addGenre() {
+        let popIn = document.getElementById('popIn');
+        popIn.classList.remove("visibilityOff");
+
+    }
+
+    saveGenre(){
+        let select = document.getElementById('selectGenre').options;
+        let genres = [];
+
+        for(let i =0; i < select.length; i++){
+            if(select[i].selected){
+                let value = select[i].value;
+                genres.push(value);
+            }
+        }
+
+        var berar = 'Bearer '+auth.getToken();
+        fetch(process.env.REACT_APP_URL+"/api/add/genre", {
+            method: "POST",
+            headers: new Headers({
+                'Authorization': berar,
+                'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
+            }),
+            body : "genre="+genres
+        }).then(response => response.json())
+            .then(response => {
+                if(response.code === "success"){
+                    this.state.genre = genres.map(function (name) {
+                        return <li>{name}</li>
+                    });
+                    this.state.genreList = genres;
+                }
+
+                this.setState({
+                    showdata : this.displayData,
+                    postVal : ""
+                });
+            });
+    }
+
+    closePopIn(){
+        document.getElementById('popIn').classList.add('visibilityOff')
+    }
+
     render() {
         return (
             <div className="main ">
                 <div id="profile" className="visibilityOff">
                     <p>{this.state.name}</p>
                     {typeof(this.state.suivre) !== "undefined" &&
-                    <button id="btnFollow" className="follow"
-                            onClick={this.addAmie}>{this.state.suivre ? "ne plus suivre" : "suivre"}</button>
+                        <button id="btnFollow" className="follow" onClick={this.addAmie}>{this.state.suivre ? "ne plus suivre" : "suivre"}</button>
                     }
-
-
+                    {typeof (this.state.suivre) == "undefined" &&
+                        <button onClick={this.addGenre}>ajout de genre</button>
+                    }
+                    <ul>{this.state.genre}</ul>
                 </div>
+
+                <div id="popIn" className="visibilityOff">
+                    <div className="formSerie">
+                        <span className="close" onClick={this.closePopIn}>&times;</span>
+                        <select id={"selectGenre"} multiple>
+                            <option selected={this.state.genreList.indexOf('action') > -1}>action</option>
+                            <option selected={this.state.genreList.indexOf('adventure') > -1}>adventure</option>
+                            <option selected={this.state.genreList.indexOf('espionnage') > -1}>espionnage</option>
+                            <option selected={this.state.genreList.indexOf('comédie') > -1}>comédie</option>
+                            <option selected={this.state.genreList.indexOf('drame') > -1}>drame</option>
+                            <option selected={this.state.genreList.indexOf('fantastique') > -1}>fantastique</option>
+                            <option selected={this.state.genreList.indexOf('horreur') > -1}>horreur</option>
+                            <option selected={this.state.genreList.indexOf('policier') > -1}>policier</option>
+                            <option selected={this.state.genreList.indexOf('amédical') > -1}>médical</option>
+                        </select>
+                        <button onClick={this.saveGenre}>Sauvegardé</button>
+                    </div>
+                </div>
+
                 <div id="loader">
                     <Loader
                         type="CradleLoader"

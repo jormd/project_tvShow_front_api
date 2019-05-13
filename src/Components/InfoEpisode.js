@@ -16,6 +16,7 @@ class InfoEpisode extends Component{
         };
 
         this.sendCom = this.sendCom.bind(this);
+        this.closePopIn = this.closePopIn.bind(this);
 
     }
 
@@ -38,10 +39,14 @@ class InfoEpisode extends Component{
             });
     }
 
+    closePopIn(){
+        document.getElementById('popIn').classList.add('visibilityOff')
+    }
+
     render() {
         return (
             <div class="infoEpisode">
-                <span className="close">&times;</span>
+                <span className="close" onClick={this.closePopIn}>&times;</span>
                 <p class="title">{this.props.name}</p>
                 <ReactHtml html={this.props.summary}/>
                 <div>{this.state.commentaires}</div>
