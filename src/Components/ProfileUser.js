@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Auth from "./../auth";
 import Loader from "react-loader-spinner";
-import SeasonList from "./SeasonList";
 
 const auth = new Auth();
 
@@ -14,7 +13,8 @@ class ProfileUser extends Component{
             name : '',
             friend: '',
             genre: '',
-            genreList : ''
+            genreList : '',
+            genreSerie : '',
         };
 
         this.recuperationUser = this.recuperationUser.bind(this);
@@ -43,13 +43,18 @@ class ProfileUser extends Component{
                         self.state.name = user.name;
                         if(typeof(user.suivre) !== "undefined"){
                             self.state.suivre = user.suivre;
-                        }console.log(user);
+                        }
                         if(typeof(user.genre) !== "undefined"){
                             self.state.genre = Object.values(user.genre).map(function (name) {
                                 return <li>{name}</li>;
                             });
                             self.state.genreList = Object.values(user.genre).map(function (name) {
                                 return name
+                            });
+                        }
+                        if(typeof(user.genreTvSHow) !== "undefined"){
+                            self.state.genreSerie = Object.values(user.genreTvSHow).map(function (name) {
+                                return <li>{name}</li>;
                             });
                         }
                     });
@@ -156,27 +161,38 @@ class ProfileUser extends Component{
                     {typeof(this.state.suivre) !== "undefined" &&
                         <button id="btnFollow" className="follow" onClick={this.addAmie}>{this.state.suivre ? "ne plus suivre" : "suivre"}</button>
                     }
-                    {typeof (this.state.suivre) == "undefined" &&
-                        <button onClick={this.addGenre}>ajout de genre</button>
-                    }
-                    <ul>{this.state.genre}</ul>
+                    <div className="genreList">
+                        <div>
+                            <h1>Genre utilisateur</h1>
+                            {typeof (this.state.suivre) == "undefined" &&
+                            <button onClick={this.addGenre}>ajout de genre</button>
+                            }
+                            <ul>{this.state.genre}</ul>
+                        </div>
+                        <div>
+                            <h1>Genre des séries suivies</h1>
+                            <ul>{this.state.genreSerie}</ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="popIn" className="visibilityOff">
                     <div className="formSerie">
                         <span className="close" onClick={this.closePopIn}>&times;</span>
-                        <select id={"selectGenre"} multiple>
-                            <option selected={this.state.genreList.indexOf('action') > -1}>action</option>
-                            <option selected={this.state.genreList.indexOf('adventure') > -1}>adventure</option>
-                            <option selected={this.state.genreList.indexOf('espionnage') > -1}>espionnage</option>
-                            <option selected={this.state.genreList.indexOf('comédie') > -1}>comédie</option>
-                            <option selected={this.state.genreList.indexOf('drame') > -1}>drame</option>
-                            <option selected={this.state.genreList.indexOf('fantastique') > -1}>fantastique</option>
-                            <option selected={this.state.genreList.indexOf('horreur') > -1}>horreur</option>
-                            <option selected={this.state.genreList.indexOf('policier') > -1}>policier</option>
-                            <option selected={this.state.genreList.indexOf('amédical') > -1}>médical</option>
-                        </select>
-                        <button onClick={this.saveGenre}>Sauvegardé</button>
+                        <div>
+                            <select id={"selectGenre"} className="selectpicker" multiple>
+                                <option selected={this.state.genreList.indexOf('action') > -1}>action</option>
+                                <option selected={this.state.genreList.indexOf('adventure') > -1}>adventure</option>
+                                <option selected={this.state.genreList.indexOf('espionnage') > -1}>espionnage</option>
+                                <option selected={this.state.genreList.indexOf('comédie') > -1}>comédie</option>
+                                <option selected={this.state.genreList.indexOf('drame') > -1}>drame</option>
+                                <option selected={this.state.genreList.indexOf('fantastique') > -1}>fantastique</option>
+                                <option selected={this.state.genreList.indexOf('horreur') > -1}>horreur</option>
+                                <option selected={this.state.genreList.indexOf('policier') > -1}>policier</option>
+                                <option selected={this.state.genreList.indexOf('amédical') > -1}>médical</option>
+                            </select>
+                            <button onClick={this.saveGenre}>Sauvegardé</button>
+                        </div>
                     </div>
                 </div>
 

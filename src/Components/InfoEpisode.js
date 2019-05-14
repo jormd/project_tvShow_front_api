@@ -34,8 +34,15 @@ class InfoEpisode extends Component{
         }).then(response => response.json())
             .then(response => {
                 if(response.code === "success") {
-                    this.state.commentaires.push(<Commentaire message={com} author="aa" />);
+                    console.log('in');
+                    this.state.commentaires.push(<Commentaire message={com} author={auth.getNom()} />);
+
+                    this.setState({
+                        showdata : this.displayData,
+                        postVal : ""
+                    });
                 }
+                document.getElementById("textarea").value = '';
             });
     }
 
@@ -48,11 +55,13 @@ class InfoEpisode extends Component{
             <div class="infoEpisode">
                 <span className="close" onClick={this.closePopIn}>&times;</span>
                 <p class="title">{this.props.name}</p>
-                <ReactHtml html={this.props.summary}/>
-                <div>{this.state.commentaires}</div>
-                <div>
-                    <textarea id="textarea" placeholder="Commentaire"></textarea>
-                    <button onClick={this.sendCom}>valide</button>
+                <div className="contentInfoEpisode">
+                    <ReactHtml html={this.props.summary}/>
+                    <div>{this.state.commentaires}</div>
+                    <div>
+                        <textarea id="textarea" placeholder="Commentaire"></textarea>
+                        <button onClick={this.sendCom}>valide</button>
+                    </div>
                 </div>
             </div>
 

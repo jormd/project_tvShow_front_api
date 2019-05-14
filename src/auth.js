@@ -23,4 +23,12 @@ export default class AuthHelperMethods {
     setId = id => {
         return localStorage.setItem('id_user', id);
     };
+
+    getNom = () => {
+        return localStorage.getItem('nom_user');
+    };
+
+    setNom = nom => {
+        return localStorage.setItem('nom_user', nom);
+    };
 }
