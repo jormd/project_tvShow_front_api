@@ -13,6 +13,7 @@ import Default from "./Components/Default";
 import CreateCompte from "./Components/CreateCompte";
 import PageTvShow from "./Components/PageTvShow";
 import Search from "./Components/Search";
+import ProfileUser from "./Components/ProfileUser";
 
 const auth = new Auth();
 
@@ -31,23 +32,36 @@ class App extends Component {
         if(auth.getAuthentificate() == 'true'){
             return [
                 <div>
-                    <Link to={'/home'} className="nav-link"><i className="material-icons">home</i></Link>
+                    <div className="elementNav">
+                        <Link to={'/home'} className="nav-link"><i className="material-icons">home</i></Link>
+                    </div>
+                    <div className="elementNav">
+                        <Link to={'/search'} className="nav-link"><i className="material-icons">search</i></Link>
+                    </div>
+                    <div className="elementNav">
+                        <Link to={'/profileuser/'+auth.getId()} className="nav-link"><i className="material-icons">settings</i></Link>
+                    </div>
                 </div>,
                 <div>
-                    <Link to={'/search'} className="nav-link"><i className="material-icons">search</i></Link>
-                </div>,
-                <div>
-                    <Link to={'/logout'} className="nav-link">Logout</Link>
+                    <div className="elementNav">
+                        <Link to={'/logout'} className="nav-link">Logout</Link>
+                    </div>
                 </div>
             ];
         }
         return [
             <div>
-                <Link to={'/'} className="nav-link"><i className="material-icons">home</i></Link>
-            </div>,
+                <div className="elementNav">
+                    <Link to={'/'} className="nav-link"><i className="material-icons">home</i></Link>
+                </div>
+            </div>
+            ,
             <div>
-                <Link to={'/login'} className="nav-link"> Login </Link>
-            </div>];
+                <div className="elementNav">
+                    <Link to={'/login'} className="nav-link"> Login </Link>
+                </div>
+            </div>
+            ];
     }
 
   render() {
@@ -65,6 +79,7 @@ class App extends Component {
                   <PrivateRoute path="/home" component={Home} exact />
                   <PrivateRoute path="/tvshow/:handle" component={PageTvShow} exact />
                   <PrivateRoute path="/search" component={Search} exact />
+                  <PrivateRoute path="/profileuser/:handle" component={ProfileUser} exact />
                   <Route component={Error} />
               </Switch>
           </BrowserRouter>

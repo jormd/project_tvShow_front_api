@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ListEpisode from "./ListEpisode";
 
 class Commentaire extends Component{
     constructor(props) {
@@ -10,7 +9,7 @@ class Commentaire extends Component{
 
     render() {
         return (
-            <div>
+            <div className="commentaire">
                 <p>{this.props.message}</p>
                 <p>{this.props.author}</p>
             </div>

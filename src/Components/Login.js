@@ -42,6 +42,8 @@ class Login extends Component {
                 if(response.code === "succes"){
                     auth.setAuthentificate(true);
                     auth.setToken(response.tokenJWT);
+                    auth.setId(response.id);
+                    auth.setNom(response.nom);
                     this.props.history.push('/home');
                     window.location.reload();
                 }
@@ -62,6 +64,8 @@ class Login extends Component {
             if(response.code === "succes"){
                 auth.setAuthentificate(true);
                 auth.setToken(response.tokenJWT);
+                auth.setId(response.id);
+                auth.setNom(response.nom);
                 this.props.history.push('/home');
                 window.location.reload();
             }

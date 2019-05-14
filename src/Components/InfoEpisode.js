@@ -16,6 +16,7 @@ class InfoEpisode extends Component{
         };
 
         this.sendCom = this.sendCom.bind(this);
+        this.closePopIn = this.closePopIn.bind(this);
 
     }
 
@@ -33,21 +34,34 @@ class InfoEpisode extends Component{
         }).then(response => response.json())
             .then(response => {
                 if(response.code === "success") {
-                    this.state.commentaires.push(<Commentaire message={com} author="aa" />);
+                    console.log('in');
+                    this.state.commentaires.push(<Commentaire message={com} author={auth.getNom()} />);
+
+                    this.setState({
+                        showdata : this.displayData,
+                        postVal : ""
+                    });
                 }
+                document.getElementById("textarea").value = '';
             });
+    }
+
+    closePopIn(){
+        document.getElementById('popIn').classList.add('visibilityOff')
     }
 
     render() {
         return (
             <div class="infoEpisode">
-                <span className="close">&times;</span>
+                <span className="close" onClick={this.closePopIn}>&times;</span>
                 <p class="title">{this.props.name}</p>
-                <ReactHtml html={this.props.summary}/>
-                <div>{this.state.commentaires}</div>
-                <div>
-                    <textarea id="textarea" placeholder="Commentaire"></textarea>
-                    <button onClick={this.sendCom}>valide</button>
+                <div className="contentInfoEpisode">
+                    <ReactHtml html={this.props.summary}/>
+                    <div>{this.state.commentaires}</div>
+                    <div>
+                        <textarea id="textarea" placeholder="Commentaire"></textarea>
+                        <button onClick={this.sendCom}>valide</button>
+                    </div>
                 </div>
             </div>
 
