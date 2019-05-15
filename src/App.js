@@ -68,20 +68,21 @@ class App extends Component {
 
       return (
           <BrowserRouter>
-              <div id="navbar">
+              <div>
+                  <div id="navbar">
                   { this.navRender() }
+                  </div>
+                  <switch>
+                        <Route path="/" component={Default} exact />
+                        <Route path="/login" component={Login} exact />
+                        <Route path="/logout" component={Logout} exact />
+                        <Route path="/CreateCompte" component={CreateCompte} exact />
+                        <PrivateRoute path="/home" component={Home} exact />
+                        <PrivateRoute path="/tvshow/:handle" component={PageTvShow} exact />
+                        <PrivateRoute path="/search" component={Search} exact />
+                        <PrivateRoute path="/profileuser/:handle" component={ProfileUser} exact />
+                  </switch>
               </div>
-              <Switch>
-                  <Route path="/" component={Default} exact />
-                  <Route path="/login" component={Login} exact />
-                  <Route path="/logout" component={Logout} exact />
-                  <Route path="/CreateCompte" component={CreateCompte} exact />
-                  <PrivateRoute path="/home" component={Home} exact />
-                  <PrivateRoute path="/tvshow/:handle" component={PageTvShow} exact />
-                  <PrivateRoute path="/search" component={Search} exact />
-                  <PrivateRoute path="/profileuser/:handle" component={ProfileUser} exact />
-                  <Route component={Error} />
-              </Switch>
           </BrowserRouter>
       );
   }
