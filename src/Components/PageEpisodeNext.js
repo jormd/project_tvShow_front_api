@@ -3,6 +3,7 @@ import Loader from 'react-loader-spinner'
 import ReactHtml from 'raw-html-react';
 
 import Auth from "./../auth";
+import Commentaire from "./Commentaire";
 
 const auth = new Auth();
 
@@ -28,7 +29,6 @@ class PageEpisodeNext extends Component{
     }
 
 
-
     recuperationEpisode(){
         var berar = 'Bearer '+auth.getToken();
         fetch(process.env.REACT_APP_URL+"/api/info/episode", {
@@ -48,8 +48,6 @@ class PageEpisodeNext extends Component{
 
                     self.state.name = response.content['name'];
                     self.state.resumer = response.content['summary'];
-
-                    console.log(this.state.name);
 
 
                     this.setState({
