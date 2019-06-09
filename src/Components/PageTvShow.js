@@ -4,7 +4,6 @@ import ReactHtml from 'raw-html-react';
 
 import Auth from "./../auth";
 import SeasonList from "./SeasonList";
-import CardTvShow from "./CardTvShow";
 
 const auth = new Auth();
 
