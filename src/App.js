@@ -8,12 +8,13 @@ import Auth from "./auth";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
 import Logout from "./Components/Logout";
-import Error from "./Components/Error";
 import Default from "./Components/Default";
 import CreateCompte from "./Components/CreateCompte";
 import PageTvShow from "./Components/PageTvShow";
 import Search from "./Components/Search";
 import ProfileUser from "./Components/ProfileUser";
+import NextEpisode from "./Components/NextEpisode";
+import PageEpisodeNext from "./Components/PageEpisodeNext";
 
 const auth = new Auth();
 
@@ -37,6 +38,9 @@ class App extends Component {
                     </div>
                     <div className="elementNav">
                         <Link to={'/search'} className="nav-link"><i className="material-icons">search</i></Link>
+                    </div>
+                    <div className="elementNav">
+                        <Link to={'/nextepisode'} className="nav-link"><i className="material-icons">tv</i></Link>
                     </div>
                     <div className="elementNav">
                         <Link to={'/profileuser/'+auth.getId()} className="nav-link"><i className="material-icons">settings</i></Link>
@@ -81,6 +85,8 @@ class App extends Component {
                         <PrivateRoute path="/tvshow/:handle" component={PageTvShow} exact />
                         <PrivateRoute path="/search" component={Search} exact />
                         <PrivateRoute path="/profileuser/:handle" component={ProfileUser} exact />
+                        <PrivateRoute path="/nextepisode" component={NextEpisode} exact />
+                      <PrivateRoute path="/episode/:param1/:param2/:param3" component={PageEpisodeNext} exact />
                   </switch>
               </div>
           </BrowserRouter>

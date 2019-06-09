@@ -1,45 +1,42 @@
 import React, { Component } from 'react';
-import Loader from 'react-loader-spinner'
-import Auth from "./../auth";
+import Auth from "../auth";
+import Loader from "react-loader-spinner";
 import CardTvShow from "./CardTvShow";
 
 const auth = new Auth();
 
-class Home extends Component{
+
+class NextEpisode extends Component{
     constructor(props) {
         super(props);
-        this.displayData = [];
 
-        this.setState({
-            showdata : this.displayData,
-            postVal : ""
-        });
-        // permet de passer le this du constructeur
-        this.recuperationSerie = this.recuperationSerie.bind(this);
-        //appel de la méthode pour l'initialisation
-        this.recuperationSerie();
+        this.state = {
+            episodes : ''
+        };
+
+        this.nextEpisode = this.nextEpisode.bind(this);
+
+        this.nextEpisode();
     }
 
-
-
-    recuperationSerie(){
+    nextEpisode(){
         var berar = 'Bearer '+auth.getToken();
-        fetch(process.env.REACT_APP_URL+"/api/series/all", {
-            method: "GET",
+        fetch(process.env.REACT_APP_URL+"/api/next/episode", {
+            method: "POST",
             headers: new Headers({
                 'Authorization': berar,
+                'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
             }),
         }).then(response => response.json())
             .then(response => {
                 if(response.code === "success"){
-
                     let self = this;
+                    self.displayData = [];
 
-                    Object.values(response.content).map(function (serie) {
-                        self.displayData.push(<CardTvShow id={serie['id']} name={serie['name']} url={serie["img"]} page={'/tvshow/'+serie['id']} />);
+                    Object.values(response.content).map(function (episode) {
+                        self.displayData.push(<CardTvShow id={episode['idSerie']} name={episode['nameSerie']} url={episode["image"]} page={"/episode/"+ episode['idSerie'] +"/"+ episode['season'] +"/"+ episode['episode']} />);
                     });
 
-                    //maj showdata
                     this.setState({
                         showdata : this.displayData,
                         postVal : ""
@@ -48,12 +45,15 @@ class Home extends Component{
                     document.getElementById('loader').remove();
                 }
             });
-    }
+        }
 
     render() {
         return (
             <div class="main">
+                <p>Episode qui vont arriver</p>
                 <div id="series">{this.displayData}</div>
+                <div id="popIn" className="visibilityOff"></div>
+
                 <div id="loader">
                     <Loader
                         type="CradleLoader"
@@ -63,8 +63,9 @@ class Home extends Component{
                     />
                 </div>
             </div>
+
         );
     }
 }
 
-export default Home;
+export default NextEpisode;
