@@ -40,7 +40,7 @@ class Search extends Component{
 
                         series.map(function (serie) {
                             let image = serie['show']["image"]?serie['show']["image"]["original"]:null;
-                            self.displayData.push(<CardTvShow id={serie['show']['id']} name={serie['show']['name']} url={image}/>);
+                            self.displayData.push(<CardTvShow id={serie['show']['id']} name={serie['show']['name']} url={image} page={"/tvshow/"+serie['show']['id']} />);
                         });
                         //
                         //maj showdata
