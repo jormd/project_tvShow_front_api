@@ -9,7 +9,7 @@ class CardTvShow extends Component{
 
     infoSerie(){
 
-        window.location = '/tvshow/'+this.props.id;
+        window.location = this.props.page;
     }
 
     render() {

@@ -15,6 +15,8 @@ class ProfileUser extends Component{
             genre: '',
             genreList : '',
             genreSerie : '',
+            time: '',
+            nbEpisodeVue: ''
         };
 
         this.recuperationUser = this.recuperationUser.bind(this);
@@ -57,6 +59,10 @@ class ProfileUser extends Component{
                                 return <li>{name}</li>;
                             });
                         }
+
+                        self.state.nbEpisodeVue = user.nbEpisodeVue;
+                        self.state.time = user.time;
+
                     });
 
                     this.setState({
@@ -173,6 +179,11 @@ class ProfileUser extends Component{
                             <h1>Genre des séries suivies</h1>
                             <ul>{this.state.genreSerie}</ul>
                         </div>
+                    </div>
+
+                    <div>
+                        <p>nombre d'heures : {this.state.time}</p>
+                        <p>nombre d'épisodes vu : {this.state.nbEpisodeVue}</p>
                     </div>
                 </div>
 
