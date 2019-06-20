@@ -64,6 +64,10 @@ body{
   cursor: pointer;
 }
 
+.css-loader-none{
+  display: none !important;
+}
+
 #loader{
   display: flex;
   justify-content: center;
