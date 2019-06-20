@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Auth from "./../auth";
 import CardTvShow from "./CardTvShow";
 import CardUser from "./CardUser";
+import Loader from "react-loader-spinner";
 const auth = new Auth();
 
 class Search extends Component{
@@ -107,6 +108,9 @@ class Search extends Component{
         }).then(response => response.json())
             .then(response => {
                 if(response.code === "success"){
+                    document.getElementById('loader').classList.remove('css-loader-none');
+
+
                     let self = this;
                     let series = response.content;
                     self.displayData = [];
@@ -117,6 +121,9 @@ class Search extends Component{
                         let image = serie['show']["image"]?serie['show']["image"]["original"]:null;
                         self.displayData.push(<CardTvShow id={serie['show']['id']} name={serie['show']['name']} url={image} page={"/tvshow/"+serie['show']['id']} />);
                     });
+
+                    document.getElementById('loader').classList.add('css-loader-none');
+
                     //
                     //maj showdata
                     this.setState({
@@ -143,6 +150,14 @@ class Search extends Component{
                 </div>
                 <div id="series">
                     {this.displayData}
+                </div>
+                <div id="loader" class="css-loader-none">
+                    <Loader
+                        type="CradleLoader"
+                        color="#00BFFF"
+                        height="100"
+                        width="100"
+                    />
                 </div>
             </div>
         );
